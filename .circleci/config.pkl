@@ -1,0 +1,33 @@
+amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.0.1#/PklCI.pkl"
+
+prb {
+  jobs {
+    "test"
+  }
+}
+
+main {
+  jobs {
+    "test"
+  }
+}
+
+jobs {
+  ["test"] {
+    docker {
+      new {
+        image = "cimg/go:1.21"
+      }
+    }
+    steps {
+      "checkout"
+      new RunStep {
+        command = """
+          curl -L -o pkl.bin https://github.com/apple/pkl/releases/download/0.25.1/pkl-linux-amd64
+          chmod +x pkl.bin
+          PKL_EXEC=$(pwd)/pkl.bin go test ./...
+          """
+      }
+    }
+  }
+}
