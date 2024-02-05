@@ -1,5 +1,5 @@
-github.com/apple/pkl-go v0.5.0 h1:jDk0OGm8u2l04iVHChNOH1aWDXBcV1tyPWK+ThZG3mI=
-github.com/apple/pkl-go v0.5.0/go.mod h1:Z6NTpWLcopDFz04cHMZyw872tJ/t2MzhnxNdeZZ5eQY=
+github.com/apple/pkl-go v0.5.1 h1:WYhM4Lw+5VbZs22jouwsUJMI7a8Y1g4gHE/QZ55cXMM=
+github.com/apple/pkl-go v0.5.1/go.mod h1:Z6NTpWLcopDFz04cHMZyw872tJ/t2MzhnxNdeZZ5eQY=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.10.0-rc/go.mod h1:ElCzW+ufi8qKqNW0FY314xriJhyJhuoJ3gFZdAHF7NM=
 github.com/bytedance/sonic v1.10.2 h1:GQebETVBxYB7JGWJtLBi07OVzWwt+8dWA00gEVW2ZFE=
