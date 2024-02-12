@@ -6,8 +6,8 @@ This is a basic HTTP server that is configured via Pkl in the `pkl/` directory.
 
 ## Requirements
 
-* Go <1.18
-* Pkl <0.25.0
+* Go >1.18
+* Pkl >0.25.0
 
 ## Project structure
 
