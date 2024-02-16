@@ -33,3 +33,9 @@ port: Port = 5051
 
 /// Redis settings for this application
 redis: RedisConfig
+
+/// Format of the output
+outputFormat: ("toml"|"json"|"yaml"|"xml")?
+
+/// Whether or not the configuration should be pretty printed
+prettyPrint: Boolean = true

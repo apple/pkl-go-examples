@@ -8,7 +8,7 @@ import (
 	"github.com/apple/pkl-go/pkl"
 )
 
-// Application configuration for the Pcl Go Example application.
+// Application configuration for the Pkl Go Example application.
 //
 // See generated sources in the gen/ directory.
 type AppConfig struct {
@@ -20,6 +20,12 @@ type AppConfig struct {
 
 	// Redis settings for this application
 	Redis *redisconfig.RedisConfig `pkl:"redis"`
+
+	// Whether or not the configuration should be pretty printed
+	PrettyPrint bool `pkl:"prettyPrint"`
+
+	// Format of the output
+	OutputFormat string `pkl:"outputFormat"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a AppConfig
