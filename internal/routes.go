@@ -17,6 +17,7 @@ package internal
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,26 +29,10 @@ func routes(s *server) {
 
 func (s *server) okay() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		h := gin.H{
+		c.JSON(200, gin.H{
 			"status": "OK",
 			"config": s.config,
-		}
-		switch s.config.OutputFormat {
-		case "json":
-			if s.config.PrettyPrint {
-				c.IndentedJSON(200, h)
-			} else {
-				c.JSON(200, h)
-			}
-		case "xml":
-			c.XML(200, h)
-		case "yaml":
-			c.YAML(200, h)
-		case "toml":
-			c.TOML(200, h)
-		default:
-			c.JSON(200, h)
-		}
+		})
 	}
 }
 
@@ -55,6 +40,7 @@ func (s *server) ping() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		_, err := s.redis.Ping(context.Background()).Result()
 		if err != nil {
+			slog.Error("redis ping failed", "error", err)
 			c.JSON(500, gin.H{
 				"error": err.Error(),
 			})

@@ -34,8 +34,11 @@ port: Port = 5051
 /// Redis settings for this application
 redis: RedisConfig
 
-/// Format of the output
-outputFormat: ("toml"|"json"|"yaml"|"xml")?
+/// The level of logging for the application.
+///
+/// - "error": Log only error level messages
+/// - "warn": Log error and warning messages
+/// - "info": Log all messages
+typealias LogLevel = "error"|"warn"|"info"
 
-/// Whether or not the configuration should be pretty printed
-prettyPrint: Boolean = true
+logLevel: LogLevel = "info"

@@ -4,6 +4,7 @@ package appconfig
 import (
 	"context"
 
+	"github.com/apple/pkl-go-examples/gen/appconfig/loglevel"
 	"github.com/apple/pkl-go-examples/gen/redisconfig"
 	"github.com/apple/pkl-go/pkl"
 )
@@ -21,11 +22,12 @@ type AppConfig struct {
 	// Redis settings for this application
 	Redis *redisconfig.RedisConfig `pkl:"redis"`
 
-	// Whether or not the configuration should be pretty printed
-	PrettyPrint bool `pkl:"prettyPrint"`
-
-	// Format of the output
-	OutputFormat string `pkl:"outputFormat"`
+	// The level of logging for the application.
+	//
+	// - "error": Log only error level messages
+	// - "warn": Log error and warning messages
+	// - "info": Log all messages
+	LogLevel loglevel.LogLevel `pkl:"logLevel"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a AppConfig
