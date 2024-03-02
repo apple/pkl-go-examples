@@ -17,6 +17,7 @@ package internal
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/gin-gonic/gin"
 )
@@ -39,6 +40,7 @@ func (s *server) ping() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		_, err := s.redis.Ping(context.Background()).Result()
 		if err != nil {
+			slog.Error("redis ping failed", "error", err)
 			c.JSON(500, gin.H{
 				"error": err.Error(),
 			})

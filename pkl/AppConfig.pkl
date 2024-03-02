@@ -33,3 +33,12 @@ port: Port = 5051
 
 /// Redis settings for this application
 redis: RedisConfig
+
+/// The level of logging for the application.
+///
+/// - "error": Log only error level messages
+/// - "warn": Log error and warning messages
+/// - "info": Log all messages
+typealias LogLevel = "error"|"warn"|"info"
+
+logLevel: LogLevel

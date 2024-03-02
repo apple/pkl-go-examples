@@ -24,3 +24,5 @@ redis {
     password = "redis"
   }
 }
+
+logLevel = "info"

@@ -17,8 +17,11 @@ package main
 
 import (
 	"context"
+	"log/slog"
+	"os"
 
 	"github.com/apple/pkl-go-examples/gen/appconfig"
+	"github.com/apple/pkl-go-examples/gen/appconfig/loglevel"
 	"github.com/apple/pkl-go-examples/internal"
 )
 
@@ -27,6 +30,23 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	var programLevel = new(slog.LevelVar)
+
+	switch cfg.LogLevel {
+	case loglevel.Info:
+		programLevel.Set(slog.LevelInfo)
+	case loglevel.Warn:
+		programLevel.Set(slog.LevelWarn)
+	case loglevel.Error:
+		programLevel.Set(slog.LevelError)
+	}
+
+	logger := slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel}))
+	slog.SetDefault(logger)
+
+	slog.Info("Starting server", "port", cfg.Port)
+
 	if err = internal.NewServer(cfg).Run(); err != nil {
 		panic(err)
 	}
