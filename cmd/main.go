@@ -21,6 +21,7 @@ import (
 	"os"
 
 	"github.com/apple/pkl-go-examples/gen/appconfig"
+	"github.com/apple/pkl-go-examples/gen/appconfig/loglevel"
 	"github.com/apple/pkl-go-examples/internal"
 )
 
