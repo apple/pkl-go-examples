@@ -33,11 +33,11 @@ func main() {
 	var programLevel = new(slog.LevelVar)
 
 	switch cfg.LogLevel {
-	case "info":
+	case loglevel.Info:
 		programLevel.Set(slog.LevelInfo)
-	case "warn":
+	case loglevel.Warn:
 		programLevel.Set(slog.LevelWarn)
-	case "error":
+	case loglevel.Error:
 		programLevel.Set(slog.LevelError)
 	}
 

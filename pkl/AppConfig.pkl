@@ -41,4 +41,4 @@ redis: RedisConfig
 /// - "info": Log all messages
 typealias LogLevel = "error"|"warn"|"info"
 
-logLevel: LogLevel = "info"
+logLevel: LogLevel
