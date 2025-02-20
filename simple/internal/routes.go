@@ -1,5 +1,5 @@
 // ===----------------------------------------------------------------------===//
-// Copyright © 2024 Apple Inc. and the Pkl project authors. All rights reserved.
+// Copyright © 2024-2025 Apple Inc. and the Pkl project authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,40 +16,38 @@
 package internal
 
 import (
-	"fmt"
+	"context"
+	"log/slog"
 
-	"github.com/go-redis/redis/v8"
-
-	"github.com/apple/pkl-go-examples/gen/appconfig"
 	"github.com/gin-gonic/gin"
 )
 
-type server struct {
-	gin    *gin.Engine
-	config *appconfig.AppConfig
-	redis  *redis.Client
+func routes(s *server) {
+	s.gin.GET("/", s.okay())
+	s.gin.GET("/ping", s.ping())
 }
 
-type Server interface {
-	Run() error
-}
-
-var _ Server = (*server)(nil)
-
-func (s server) Run() error {
-	return s.gin.Run(fmt.Sprintf("%s:%d", s.config.Host, s.config.Port))
-}
-
-func NewServer(config *appconfig.AppConfig) Server {
-	s := &server{
-		gin:    gin.Default(),
-		config: config,
-		redis: redis.NewClient(&redis.Options{
-			Addr:     fmt.Sprintf("%s:%d", config.Redis.Host, config.Redis.Port),
-			Password: config.Redis.Auth.Password,
-			Username: config.Redis.Auth.Username,
-		}),
+func (s *server) okay() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "OK",
+			"config": s.config,
+		})
 	}
-	routes(s)
-	return s
+}
+
+func (s *server) ping() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		_, err := s.redis.Ping(context.Background()).Result()
+		if err != nil {
+			slog.Error("redis ping failed", "error", err)
+			c.JSON(500, gin.H{
+				"error": err.Error(),
+			})
+			return
+		}
+		c.JSON(200, gin.H{
+			"status": "OK",
+		})
+	}
 }

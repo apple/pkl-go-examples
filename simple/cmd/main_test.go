@@ -2,10 +2,11 @@ package main_test
 
 import (
 	"context"
-	"github.com/apple/pkl-go-examples/gen/appconfig"
-	"github.com/apple/pkl-go-examples/gen/redisconfig"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/apple/pkl-go-examples/simple/gen/appconfig"
+	"github.com/apple/pkl-go-examples/simple/gen/redisconfig"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadAppConfig(t *testing.T) {

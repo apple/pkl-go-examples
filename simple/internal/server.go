@@ -13,41 +13,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // ===----------------------------------------------------------------------===//
-amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.1.0#/PklCI.pkl"
+package internal
 
-prb {
-  jobs {
-    "test"
-  }
+import (
+	"fmt"
+
+	"github.com/go-redis/redis/v8"
+
+	"github.com/apple/pkl-go-examples/simple/gen/appconfig"
+	"github.com/gin-gonic/gin"
+)
+
+type server struct {
+	gin    *gin.Engine
+	config *appconfig.AppConfig
+	redis  *redis.Client
 }
 
-main {
-  jobs {
-    "test"
-  }
+type Server interface {
+	Run() error
 }
 
-jobs {
-  ["test"] {
-    docker {
-      new {
-        image = "cimg/go:1.23"
-      }
-    }
-    steps {
-      "checkout"
-      new RunStep {
-        name = "test"
-        command = """
-          mkdir -p /tmp/bin
-          export PATH=$PATH:/tmp/bin
-          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.27.2/pkl-linux-amd64
-          chmod +x /tmp/bin/pkl
-          go install github.com/apple/pkl-go/cmd/pkl-gen-go@latest
-          go list -f '{{.Dir}}/...' -m | xargs go generate
-          go list -f '{{.Dir}}/...' -m | xargs go test
-          """
-      }
-    }
-  }
+var _ Server = (*server)(nil)
+
+func (s server) Run() error {
+	return s.gin.Run(fmt.Sprintf("%s:%d", s.config.Host, s.config.Port))
+}
+
+func NewServer(config *appconfig.AppConfig) Server {
+	s := &server{
+		gin:    gin.Default(),
+		config: config,
+		redis: redis.NewClient(&redis.Options{
+			Addr:     fmt.Sprintf("%s:%d", config.Redis.Host, config.Redis.Port),
+			Password: config.Redis.Auth.Password,
+			Username: config.Redis.Auth.Username,
+		}),
+	}
+	routes(s)
+	return s
 }

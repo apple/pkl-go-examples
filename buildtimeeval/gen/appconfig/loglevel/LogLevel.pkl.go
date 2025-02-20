@@ -6,6 +6,11 @@ import (
 	"fmt"
 )
 
+// The level of logging for the application.
+//
+// - "error": Log only error level messages
+// - "warn": Log error and warning messages
+// - "info": Log all messages
 type LogLevel string
 
 const (

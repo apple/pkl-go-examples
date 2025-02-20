@@ -1,5 +1,5 @@
 // ===----------------------------------------------------------------------===//
-// Copyright © 2024 Apple Inc. and the Pkl project authors. All rights reserved.
+// Copyright © 2025 Apple Inc. and the Pkl project authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,27 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // ===----------------------------------------------------------------------===//
-@go.Package { name = "github.com/apple/pkl-go-examples/gen/redisconfig" }
-module org.pkl.golang.example.RedisConfig
 
-import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.0#/go.pkl"
-
-class Auth {
-  /// Basic HTTP authorization username
-  username: String
-
-  /// Basic HTTP authorization password
-  password: String
-}
-
-/// Whether Redis connections are enabled or not.
-enabled: Boolean
-
-/// The hostname that Redis listens on
-host: String
-
-/// The port that Redis listens on
-port: UInt16
-
-/// Authorization settings for Redis
-auth: Auth?
+//go:generate pkl-gen-go pkl/AppConfig.pkl
+//go:generate go run cmd/internal/generate-pkl-data/main.go
+package buildtimeeval

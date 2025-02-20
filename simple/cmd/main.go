@@ -1,5 +1,5 @@
 // ===----------------------------------------------------------------------===//
-// Copyright © 2024 Apple Inc. and the Pkl project authors. All rights reserved.
+// Copyright © 2024-2025 Apple Inc. and the Pkl project authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,13 +20,18 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/apple/pkl-go-examples/gen/appconfig"
-	"github.com/apple/pkl-go-examples/gen/appconfig/loglevel"
-	"github.com/apple/pkl-go-examples/internal"
+	"github.com/apple/pkl-go-examples/simple/gen/appconfig"
+	"github.com/apple/pkl-go-examples/simple/gen/appconfig/loglevel"
+	"github.com/apple/pkl-go-examples/simple/internal"
+	"github.com/apple/pkl-go/pkl"
 )
 
 func main() {
-	cfg, err := appconfig.LoadFromPath(context.Background(), "pkl/dev/config.pkl")
+	evaluator, err := pkl.NewProjectEvaluator(context.Background(), "pkl/", pkl.PreconfiguredOptions)
+	if err != nil {
+		panic(err)
+	}
+	cfg, err := appconfig.Load(context.Background(), evaluator, pkl.FileSource("pkl/dev/config.pkl"))
 	if err != nil {
 		panic(err)
 	}

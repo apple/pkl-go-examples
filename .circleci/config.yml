@@ -8,11 +8,16 @@ jobs:
     - checkout
     - run:
         command: |-
-          curl -L -o pkl.bin https://github.com/apple/pkl/releases/download/0.25.2/pkl-linux-amd64
-          chmod +x pkl.bin
-          PKL_EXEC=$(pwd)/pkl.bin go test ./...
+          mkdir -p /tmp/bin
+          export PATH=$PATH:/tmp/bin
+          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.27.2/pkl-linux-amd64
+          chmod +x /tmp/bin/pkl
+          go install github.com/apple/pkl-go/cmd/pkl-gen-go@latest
+          go list -f '{{.Dir}}/...' -m | xargs go generate
+          go list -f '{{.Dir}}/...' -m | xargs go test
+        name: test
     docker:
-    - image: cimg/go:1.21
+    - image: cimg/go:1.23
 workflows:
   prb:
     jobs:
@@ -23,7 +28,6 @@ workflows:
     - test:
         requires:
         - hold
-        - pr-approval/authenticate
     when:
       matches:
         value: << pipeline.git.branch >>
