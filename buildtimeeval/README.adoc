@@ -1,0 +1,69 @@
+= Build Time Eval
+
+This example is almost the same as link:../simple[simple], except that it moves evaluation from run time into build time.
+
+At run time, instead of using the Pkl evaluator, it reads the embedded bytes and unmarshals it into a config struct.
+
+== When to use this
+
+During the course of evaluation, pkl-go will spawn the `pkl` CLI as a child process in order to execute the entrypoint Pkl programs.
+
+Typically, evaluation happens at runtime, where the `pkl.Evaluator` API is used to eval Pkl data into Go data.
+However, it's possible to move evaluation to build time, where the evaluated results are serialized into binary, then later unmarshaled.
+This means that the Pkl CLI does not need to be available in the environment when running the application.
+
+This approach is not feasible if:
+
+* The Go application should be evaluating Pkl modules at runtime (e.g. if you are building a tool that allows configuration through Pkl)
+* `read` or `import` requires access to runtime inputs (e.g. `dbPassword = read("env:DATABASE_PASSWORD")`, assuming that `DATABASE_PASSWORD` is only set at runtime).
+
+== Project structure
+
+[cols=",",options="header",]
+|===
+|Directory |Description
+|`pkl/` |Pkl configuration sources
+|`gen/` |Generated Go sources from Pkl
+|`configdata/` |Embedded Pkl binary data
+|`internal/` |Internal Go files
+|`cmd/` |Server entrypoint
+|===
+
+== Codegen
+
+To generate new Pkl sources for the AppConfig module, first install the
+Go code generator:
+
+[source,bash]
+----
+go install github.com/apple/pkl-go/cmd/pkl-gen-go@latest
+----
+
+With that installed, generate Go sources via:
+
+[source,bash]
+----
+pkl-gen-go pkl/AppConfig.pkl
+----
+
+The code generator detects that the Go package for `AppConfig` is
+`github.com/apple/pkl-go-examples/simple/gen/appconfig`, and the Go module
+name is `github.com/apple/pkl-go-examples` (via the go.mod file), and
+therefore places generated sources in `gen/appconfig`.
+
+[[generate-config-data]]
+== Generating config data
+
+To generate config data, run `go run cmd/internal/generate-pkl-data`.
+Alternatively, run `go generate ./...`, which will run both codegen and generate msgpack data.
+
+== Starting the app
+
+First, follow the steps to <<generate-config-data,generate config data>>.
+
+[source,bash]
+----
+go run cmd/main.go
+----
+
+Alternatively, replace `go run` with `go build`, and start the resulting executable.

@@ -1,2 +1,5 @@
 .idea/
 .DS_Store
+.pkl-lsp/
+
+*.msgpack

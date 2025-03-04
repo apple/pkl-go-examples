@@ -4,8 +4,8 @@ package appconfig
 import (
 	"context"
 
-	"github.com/apple/pkl-go-examples/gen/appconfig/loglevel"
-	"github.com/apple/pkl-go-examples/gen/redisconfig"
+	"github.com/apple/pkl-go-examples/buildtimeeval/gen/appconfig/loglevel"
+	"github.com/apple/pkl-go-examples/buildtimeeval/gen/redisconfig"
 	"github.com/apple/pkl-go/pkl"
 )
 
@@ -22,11 +22,6 @@ type AppConfig struct {
 	// Redis settings for this application
 	Redis *redisconfig.RedisConfig `pkl:"redis"`
 
-	// The level of logging for the application.
-	//
-	// - "error": Log only error level messages
-	// - "warn": Log error and warning messages
-	// - "info": Log all messages
 	LogLevel loglevel.LogLevel `pkl:"logLevel"`
 }
 
