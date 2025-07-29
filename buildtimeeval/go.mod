@@ -1,11 +1,11 @@
 module github.com/apple/pkl-go-examples/buildtimeeval
 
-go 1.22.1
+go 1.23.7
 
-toolchain go1.23.5
+toolchain go1.23.11
 
 require (
-	github.com/apple/pkl-go v0.9.0
+	github.com/apple/pkl-go v0.11.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/stretchr/testify v1.10.0

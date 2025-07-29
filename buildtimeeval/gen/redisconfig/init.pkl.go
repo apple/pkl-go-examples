@@ -4,6 +4,6 @@ package redisconfig
 import "github.com/apple/pkl-go/pkl"
 
 func init() {
-	pkl.RegisterMapping("org.pkl.golang.example.RedisConfig", RedisConfig{})
-	pkl.RegisterMapping("org.pkl.golang.example.RedisConfig#Auth", Auth{})
+	pkl.RegisterStrictMapping("org.pkl.golang.example.RedisConfig", RedisConfig{})
+	pkl.RegisterStrictMapping("org.pkl.golang.example.RedisConfig#Auth", Auth{})
 }

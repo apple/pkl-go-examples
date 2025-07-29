@@ -16,28 +16,16 @@
 package main
 
 import (
-	"context"
 	"log/slog"
 	"os"
 
-	"github.com/apple/pkl-go-examples/simple/gen/appconfig"
 	"github.com/apple/pkl-go-examples/simple/gen/appconfig/loglevel"
 	"github.com/apple/pkl-go-examples/simple/internal"
-	"github.com/apple/pkl-go/pkl"
 )
 
 func main() {
-	evaluator, err := pkl.NewProjectEvaluator(context.Background(), "pkl/", pkl.PreconfiguredOptions)
-	if err != nil {
-		panic(err)
-	}
-	cfg, err := appconfig.Load(context.Background(), evaluator, pkl.FileSource("pkl/dev/config.pkl"))
-	if err != nil {
-		panic(err)
-	}
-
+	cfg := internal.LoadAppConfig()
 	var programLevel = new(slog.LevelVar)
-
 	switch cfg.LogLevel {
 	case loglevel.Info:
 		programLevel.Set(slog.LevelInfo)
@@ -52,7 +40,7 @@ func main() {
 
 	slog.Info("Starting server", "port", cfg.Port)
 
-	if err = internal.NewServer(cfg).Run(); err != nil {
+	if err := internal.NewServer(cfg).Run(); err != nil {
 		panic(err)
 	}
 }

@@ -4,5 +4,5 @@ package appconfig
 import "github.com/apple/pkl-go/pkl"
 
 func init() {
-	pkl.RegisterMapping("org.pkl.golang.example.AppConfig", AppConfig{})
+	pkl.RegisterStrictMapping("org.pkl.golang.example.AppConfig", AppConfig{})
 }

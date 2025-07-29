@@ -26,7 +26,7 @@ import (
 
 type server struct {
 	gin    *gin.Engine
-	config *appconfig.AppConfig
+	config appconfig.AppConfig
 	redis  *redis.Client
 }
 
@@ -40,7 +40,7 @@ func (s server) Run() error {
 	return s.gin.Run(fmt.Sprintf("%s:%d", s.config.Host, s.config.Port))
 }
 
-func NewServer(config *appconfig.AppConfig) Server {
+func NewServer(config appconfig.AppConfig) Server {
 	s := &server{
 		gin:    gin.Default(),
 		config: config,
