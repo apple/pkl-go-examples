@@ -26,7 +26,7 @@ import (
 )
 
 func main() {
-	evaluator, err := pkl.NewEvaluator(context.Background(), pkl.PreconfiguredOptions)
+	evaluator, err := pkl.NewProjectEvaluator(context.Background(), ".", pkl.PreconfiguredOptions)
 	if err != nil {
 		panic(err)
 	}

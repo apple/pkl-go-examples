@@ -16,7 +16,7 @@
 @go.Package { name = "github.com/apple/pkl-go-examples/simple/gen/redisconfig" }
 module org.pkl.golang.example.RedisConfig
 
-import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.9.0#/go.pkl"
+import "@go/go.pkl"
 
 class Auth {
   /// Basic HTTP authorization username
