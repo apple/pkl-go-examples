@@ -3,9 +3,9 @@
   "resolvedDependencies": {
     "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0": {
       "type": "remote",
-      "uri": "projectpackage://pkg.pkl-lang.org/pkl-go/pkl.golang@0.11.0",
+      "uri": "projectpackage://pkg.pkl-lang.org/pkl-go/pkl.golang@0.11.1",
       "checksums": {
-        "sha256": "cc351272251f7d0c93cd93de413f49898effcc432d832135ee9412dda39aea89"
+        "sha256": "8116c0ad12a9b7284642871dd698c6ff70d018cb1bfe77b4d1fb7871781e73bf"
       }
     }
   }

@@ -15,19 +15,11 @@ This is a simple web service that uses Pkl to drive configuration.
 
 == Codegen
 
-To generate new Pkl sources for the AppConfig module, first install the
-Go code generator:
+To generate new Pkl sources for the AppConfig module, run:
 
 [source,bash]
 ----
-go install github.com/apple/pkl-go/cmd/pkl-gen-go@latest
-----
-
-With that installed, generate Go sources via:
-
-[source,bash]
-----
-pkl-gen-go pkl/AppConfig.pkl
+go tool pkl-gen-go pkl/AppConfig.pkl
 ----
 
 Or, alternatively, with `go generate` (see link:./generate.go[generate.go]):

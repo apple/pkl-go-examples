@@ -14,6 +14,6 @@
 // limitations under the License.
 // ===----------------------------------------------------------------------===//
 
-//go:generate pkl-gen-go pkl/AppConfig.pkl
+//go:generate go tool pkl-gen-go pkl/AppConfig.pkl
 //go:generate go run cmd/internal/generate-pkl-data/main.go
 package buildtimeeval

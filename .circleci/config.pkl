@@ -31,7 +31,7 @@ jobs {
   ["test"] {
     docker {
       new {
-        image = "cimg/go:1.23"
+        image = "cimg/go:1.25"
       }
     }
     steps {
@@ -41,9 +41,8 @@ jobs {
         command = """
           mkdir -p /tmp/bin
           export PATH=$PATH:/tmp/bin
-          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.29.0/pkl-linux-amd64
+          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.29.1/pkl-linux-amd64
           chmod +x /tmp/bin/pkl
-          go install github.com/apple/pkl-go/cmd/pkl-gen-go@latest
           go list -f '{{.Dir}}/...' -m | xargs go generate
           go list -f '{{.Dir}}/...' -m | xargs go test
           """
