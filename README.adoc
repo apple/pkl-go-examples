@@ -2,5 +2,10 @@
 
 Ready-go-to examples that demonstrate using Pkl with Go applications.
 
-* link:./simple[Simple Example]
-* link:./buildtimeeval[Build Time Evaluation Example]
+* link:./simple[Simple Example] illustrates a basic web service that uses Pkl to drive configuration.
+* link:./buildtimeeval[Build Time Evaluation Example] is similar to the simple example but moves Pkl evaluation from run time to build time.
+
+=== Requirements
+
+* Go >1.25
+* Pkl >0.29.1
