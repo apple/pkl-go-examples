@@ -8,4 +8,4 @@ Ready-go-to examples that demonstrate using Pkl with Go applications.
 === Requirements
 
 * Go >1.25
-* Pkl >0.29.1
+* Pkl >0.30.0

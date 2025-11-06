@@ -41,7 +41,7 @@ jobs {
         command = """
           mkdir -p /tmp/bin
           export PATH=$PATH:/tmp/bin
-          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.29.1/pkl-linux-amd64
+          curl -L -o /tmp/bin/pkl https://github.com/apple/pkl/releases/download/0.30.0/pkl-linux-amd64
           chmod +x /tmp/bin/pkl
           go list -f '{{.Dir}}/...' -m | xargs go generate
           go list -f '{{.Dir}}/...' -m | xargs go test
