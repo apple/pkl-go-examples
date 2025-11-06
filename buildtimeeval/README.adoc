@@ -46,7 +46,7 @@ therefore places generated sources in `gen/appconfig`.
 [[generate-config-data]]
 == Generating config data
 
-To generate config data, run `go generate ./...`, which will run both codegen and generate msgpack data.
+To generate config data, run `go generate ./...`, which will run both codegen and generate `pkl-binary` data.
 Alternatively, run Pkl directly with `pkl eval -f pkl-binary pkl/*/*.pkl -o configdata/%\{moduleDir}/%\{moduleName}.msgpack`.
 
 == Starting the app
