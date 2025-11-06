@@ -15,5 +15,5 @@
 // ===----------------------------------------------------------------------===//
 
 //go:generate go tool pkl-gen-go pkl/AppConfig.pkl
-//go:generate go run cmd/internal/generate-pkl-data/main.go
+//go:generate sh -c "pkl eval -f pkl-binary pkl/*/*.pkl -o configdata/%{moduleDir}/%{moduleName}.msgpack"
 package buildtimeeval
