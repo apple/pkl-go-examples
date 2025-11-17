@@ -14,41 +14,13 @@
 // limitations under the License.
 //===----------------------------------------------------------------------===//
 
-package internal
+amends "pkl:Project"
 
-import (
-	"context"
-	"log/slog"
-
-	"github.com/gin-gonic/gin"
-)
-
-func routes(s *server) {
-	s.gin.GET("/", s.okay())
-	s.gin.GET("/ping", s.ping())
-}
-
-func (s *server) okay() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"status": "OK",
-			"config": s.config,
-		})
-	}
-}
-
-func (s *server) ping() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		_, err := s.redis.Ping(context.Background()).Result()
-		if err != nil {
-			slog.Error("redis ping failed", "error", err)
-			c.JSON(500, gin.H{
-				"error": err.Error(),
-			})
-			return
-		}
-		c.JSON(200, gin.H{
-			"status": "OK",
-		})
-	}
+dependencies {
+  ["pkl.impl.ghactions"] {
+    uri = "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.ghactions@0.7.1"
+  }
+  ["gha"] {
+    uri = "package://pkg.pkl-lang.org/github.com/stefma/pkl-gha/com.github.action@0.0.6"
+  }
 }
