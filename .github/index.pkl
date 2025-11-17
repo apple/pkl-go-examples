@@ -31,6 +31,8 @@ local test: Workflow = new {
         new Setup.Go {
           with {
             `go-version` = "1.25"
+            `check-latest` = true
+            `cache-dependency-path` = "go.work.sum"
           }
         }
         new SetupPkl { version = "0.30.0" }.step
