@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
+      with:
+        persist-credentials: false
     - uses: actions/setup-go@v6
       with:
         go-version: '1.25'
@@ -49,6 +51,7 @@ jobs:
     steps:
     - uses: actions/checkout@v5
       with:
+        persist-credentials: false
         fetch-depth: 0
     - run: hawkeye check --config licenserc.toml --fail-if-unknown
     container:
