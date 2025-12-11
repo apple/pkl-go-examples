@@ -16,9 +16,8 @@
 
 amends "@pkl.impl.ghactions/PklCI.pkl"
 
-import "@gha/actions/Common.pkl"
-import "@gha/actions/Setup.pkl"
-import "@gha/Workflow.pkl"
+import "@com.github.actions/catalog.pkl"
+import "@com.github.actions/Workflow.pkl"
 import "@pkl.impl.ghactions/jobs/HawkeyeCheck.pkl"
 import "@pkl.impl.ghactions/steps/SetupPkl.pkl"
 
@@ -27,8 +26,8 @@ local test: Workflow = new {
     ["test"] {
       `runs-on` = "ubuntu-latest"
       steps {
-        new Common.Checkout {}
-        new Setup.Go {
+        catalog.`actions/checkout@v6`
+        (catalog.`actions/setup-go@v6`) {
           with {
             `go-version` = "1.25"
             `check-latest` = true
