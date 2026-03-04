@@ -1,5 +1,5 @@
 //===----------------------------------------------------------------------===//
-// Copyright © 2025 Apple Inc. and the Pkl project authors. All rights reserved.
+// Copyright © 2025-2026 Apple Inc. and the Pkl project authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,5 +17,5 @@
 amends "pkl:Project"
 
 dependencies {
-  ["go"] { uri = "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.12.0" }
+  ["go"] { uri = "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.13.2" }
 }
