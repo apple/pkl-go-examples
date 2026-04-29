@@ -3,3 +3,7 @@
 .pkl-lsp/
 
 *.msgpack
+
+# go.work files aren't meant to be checked into version control.
+go.work
+go.work.sum

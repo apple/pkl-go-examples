@@ -31,22 +31,23 @@ local test: Workflow = new {
           with {
             `go-version` = "1.26"
             `check-latest` = true
-            `cache-dependency-path` = "go.work.sum"
           }
         }
         new SetupPkl { version = "0.31.0" }.step
         new {
           name = "go generate"
           run =
+            // language=bash
             """
-            go list -f '{{.Dir}}/...' -m | xargs go generate
+            find . -name 'go.mod' -execdir go generate ./... \\;
             """
         }
         new {
           name = "go test"
           run =
+            // language=bash
             """
-            go list -f '{{.Dir}}/...' -m | xargs go test
+            find . -name 'go.mod' -execdir go test ./... \\;
             """
         }
         new {
@@ -67,3 +68,24 @@ prb = test
 build = test
 
 main = test
+
+dependabot {
+  updates {
+    new {
+      `package-ecosystem` = "gomod"
+      directories {
+        "/buildtimeeval"
+        "/simple"
+      }
+      cooldown {
+        `default-days` = 7
+        exclude {
+          "github.com/apple/pkl-go"
+        }
+      }
+      schedule {
+        interval = "weekly"
+      }
+    }
+  }
+}

@@ -24,7 +24,6 @@ jobs:
       with:
         go-version: '1.26'
         check-latest: true
-        cache-dependency-path: go.work.sum
     - name: Setup Pkl
       id: setup-pkl
       env:
@@ -40,9 +39,9 @@ jobs:
         echo "$DIR" >> "$GITHUB_PATH"
         echo "pkl_exec=$PKL_EXEC" >> "$GITHUB_OUTPUT"
     - name: go generate
-      run: go list -f '{{.Dir}}/...' -m | xargs go generate
+      run: find . -name 'go.mod' -execdir go generate ./... \;
     - name: go test
-      run: go list -f '{{.Dir}}/...' -m | xargs go test
+      run: find . -name 'go.mod' -execdir go test ./... \;
     - name: pkl format
       run: pkl format --diff-name-only .
   hawkeye-check:
