@@ -51,6 +51,15 @@ jobs:
     - run: hawkeye check --config licenserc.toml --fail-if-unknown
     container:
       image: ghcr.io/korandoru/hawkeye@sha256:e0abf8dbfaeeeba1249679d662d9fb404b1dcdb041c6093ea1f7a6edb7d89319
+  verdict:
+    if: '!cancelled() && !failure()'
+    needs:
+    - check-pkl-github-actions
+    - test
+    - hawkeye-check
+    runs-on: ubuntu-latest
+    steps:
+    - run: 'true'
   upload-event-file:
     runs-on: ubuntu-latest
     steps:
