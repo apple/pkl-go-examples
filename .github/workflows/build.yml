@@ -27,9 +27,9 @@ jobs:
     - name: Setup Pkl
       id: setup-pkl
       env:
-        PKL_VERSION: 0.31.0
+        PKL_VERSION: 0.32.0
         PKL_FILENAME: pkl
-        PKL_DOWNLOAD_URL: https://github.com/apple/pkl/releases/download/0.31.0/pkl-linux-amd64
+        PKL_DOWNLOAD_URL: https://github.com/apple/pkl/releases/download/0.32.0/pkl-linux-amd64
       shell: bash
       run: |-
         DIR="$(mktemp -d /tmp/pkl-$PKL_VERSION-XXXXXX)"
