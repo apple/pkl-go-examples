@@ -8,8 +8,11 @@ updates:
   directories:
   - /buildtimeeval
   - /simple
+  groups:
+    all:
+      group-by: dependency-name
   schedule:
-    interval: weekly
+    interval: quarterly
 - package-ecosystem: github-actions
   cooldown:
     default-days: 7

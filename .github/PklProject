@@ -23,4 +23,7 @@ dependencies {
   ["com.github.actions"] {
     uri = "package://pkg.pkl-lang.org/pkl-pantry/com.github.actions@1.6.0"
   }
+  ["com.github.dependabot"] {
+    uri = "package://pkg.pkl-lang.org/pkl-pantry/com.github.dependabot@1.1.0"
+  }
 }
