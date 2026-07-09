@@ -3,7 +3,7 @@ module github.com/apple/pkl-go-examples/simple
 go 1.25.0
 
 require (
-	github.com/apple/pkl-go v0.13.2
+	github.com/apple/pkl-go v0.14.0
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/stretchr/testify v1.11.1
