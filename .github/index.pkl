@@ -30,6 +30,7 @@ local test: Workflow = new {
         (catalog.`actions/setup-go@v6`) {
           with {
             `go-version` = "1.26"
+            cache = false
             `check-latest` = true
           }
         }
